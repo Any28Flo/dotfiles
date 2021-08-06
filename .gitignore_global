@@ -1,0 +1,13 @@
+#IntelliJ IDEA
+.idea
+*.iml
+*.iws
+.idea-compl
+*.sc
+
+#Custom
+.no-commit
+
+# Visual Studio Code
+.vscode
+

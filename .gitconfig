@@ -1,0 +1,8 @@
+[user]
+	name = Erika Flores
+	email = foglzerika@gmail.com
+[alias]
+	st = status
+	c = !git add -A && git commit
+[core]
+	excludesfile = /home/daedra/.gitignore_global
