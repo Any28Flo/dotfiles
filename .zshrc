@@ -1,3 +1,6 @@
+#zmodload zsh/zprof
+
+ZSH_DISABLE_COMPFIX="true"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -71,7 +74,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 #source ~/.bash_profile
@@ -101,12 +104,47 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#Load nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 #enable color output 
 export CLICOLOR=1
 
 export LSCOLORS=gx
+#Console aliases
 alias l='ls | lolcat' 
 alias la='ls -la | lolcat'
+alias ..="cd .."
+alias cdc="cd '$HOME/Code'"
+alias cdg="cd '$HOME/Generation'"
+alias md="mkdir"
+alias avrakedabra="rm -rf"
+#Git aliases 
+alias gaa="git add -A"
+alias ga.="git add ."
+alias gs="git status -sb"
+alias gps="git push"
+#Binding
+_display_message(){
+	echo -n "message"
+}
+#Reverse search with fzf
+_reverse_search(){
+	local selected_command=$(fc -rl 1 | awk '{$1="";print substr($0,2)}' | fzf)
+  	LBUFFER=$selected_command
+
+}
+
+zle -N _display_message
+zle -N _reverse_search
+
+bindkey '^r' _reverse_search
+bindkey '^h' _display_message
+#zprof
+#Set VI as a defaul editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 
